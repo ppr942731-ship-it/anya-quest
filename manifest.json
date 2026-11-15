@@ -6,12 +6,5 @@
   "display": "standalone",
   "background_color": "#111111",
   "theme_color": "#111111",
-  "icons": [
-    {
-      "src": "https://files.catbox.moe/yv8lrg.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ]
+  "icons": [{"src": "https://files.catbox.moe/yv8lrg.png","sizes": "512x512","type": "image/png","purpose": "any maskable"}]
 }
