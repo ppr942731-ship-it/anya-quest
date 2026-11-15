@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anya Quest - Tebak Logo</title>
+<style>
+  body{font-family:Arial,sans-serif;background:#0f0f1a;color:#fff;text-align:center;padding:20px;margin:0}
+  .box{max-width:480px;margin:auto;background:#1c1c2e;border-radius:16px;padding:20px;border:2px solid #a855f7}
+  img{width:200px;height:200px;object-fit:contain;background:#fff;border-radius:12px}
+  input{width:90%;padding:12px;border-radius:10px;border:none;margin:12px 0;font-size:16px;text-align:center}
+  button{padding:12px 20px;border:none;border-radius:10px;background:#a855f7;color:#fff;font-size:16px;cursor:pointer;width:100%}
+  .score{color:#22ff88}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>🎮 Anya Quest</h1>
+  <p>Tebak Logo</p>
+  <p class="score">Skor: <span id="score">0</span> | Soal: <span id="num">1</span>/<span id="total">0</span></p>
+  <p id="deskripsi">Memuat soal...</p>
+  <img id="gambar" src="" alt="logo">
+  <br>
+  <input id="jawaban" placeholder="Ketik jawaban kamu...">
+  <button onclick="cek()">JAWAB</button>
+  <p id="hasil"></p>
+  <button onclick="nextSoal()">SOAL BERIKUTNYA ➡️</button>
+</div>
+
+<script>
+let soal = [];
+let index = 0;
+let skor = 0;
+
+// Ambil soal dari file tebaklogo.json yang ada di GitHub yang sama
+fetch('tebaklogo.json')
+  .then(res => res.json())
+  .then(data => {
+    soal = data;
+    document.getElementById('total').innerText = soal.length;
+    tampilSoal();
+  })
+  .catch(() => {
+    document.getElementById('deskripsi').innerText = 'Gagal load tebaklogo.json, cek file nya di GitHub ya';
+  });
+
+function tampilSoal(){
+  let s = soal[index];
+  document.getElementById('deskripsi').innerText = s.deskripsi;
+  document.getElementById('gambar').src = s.img;
+  document.getElementById('num').innerText = index + 1;
+  document.getElementById('jawaban').value = '';
+  document.getElementById('hasil').innerText = '';
+}
+
+function cek(){
+  let jawab = document.getElementById('jawaban').value.toLowerCase().trim();
+  let benar = soal[index].jawaban.toLowerCase().trim();
+  if(jawab === benar){
+    skor += 10;
+    document.getElementById('score').innerText = skor;
+    document.getElementById('hasil').innerText = '✅ BENAR! +10 Poin';
+  } else {
+    document.getElementById('hasil').innerText = '❌ SALAH! Jawabannya: ' + soal[index].jawaban;
+  }
+}
+
+function nextSoal(){
+  index++;
+  if(index >= soal.length) index = 0;
+  tampilSoal();
+}
+</script>
+</body>
+  </html>
