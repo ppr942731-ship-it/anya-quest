@@ -2,201 +2,326 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Anya Quest</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Anya Quest - Your Adventure, Your Challenge!</title>
+<meta name="description" content="Anya Quest - 15 game kuis, kumpulin koin, naik level! Your Adventure, Your Challenge!">
+<meta name="theme-color" content="#111111">
+
+<!-- LOGO -->
+<link rel="icon" type="image/png" href="https://files.catbox.moe/yv8lrg.png">
+<link rel="shortcut icon" type="image/png" href="https://files.catbox.moe/yv8lrg.png">
+<link rel="apple-touch-icon" href="https://files.catbox.moe/yv8lrg.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Anya Quest">
+<link rel="manifest" href="manifest.json">
+
+<!-- THUMBNAIL SHARE WA -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://anya-quest-lmdp.vercel.app/">
+<meta property="og:title" content="Anya Quest">
+<meta property="og:description" content="Your Adventure, Your Challenge! Main 15 game kuis, kumpulin koin, naik level!">
+<meta property="og:image" content="https://files.catbox.moe/yv8lrg.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Anya Quest">
+<meta name="twitter:description" content="Your Adventure, Your Challenge!">
+<meta name="twitter:image" content="https://files.catbox.moe/yv8lrg.png">
+
 <style>
-*{box-sizing:border-box}body{margin:0;background:#111;color:#fff;font-family:system-ui,Arial,sans-serif;padding-bottom:110px}
-.top{padding:16px 16px 0}
-.logo{font-size:32px;font-weight:900;color:#a6ff00;line-height:1;text-align:center;letter-spacing:-.5px}
-.sub{text-align:center;color:#ccc;font-size:14px;margin-top:4px}
-.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0}
-.stat{background:#fff;color:#111;border-radius:14px;padding:12px 6px;text-align:center}
-.stat b{display:block;font-size:20px}.stat span{font-size:12px;color:#666}
-.card{background:#fff;color:#111;border-radius:18px;padding:14px;margin:0 16px 12px;display:flex;align-items:center;gap:12px;cursor:pointer}
-.icon{width:52px;height:52px;min-width:52px;border-radius:14px;background:#a6ff00;display:grid;place-items:center;font-size:28px;border:2px solid #111}
-.card b{font-size:17px;display:block}.card small{color:#666;font-size:13px}
-.play{margin-left:auto;background:#a6ff00;border:2px solid #111;border-radius:12px;padding:10px 14px;font-weight:900;font-size:13px;cursor:pointer}
-.play:disabled{background:#ddd;color:#888}
-.info{background:#fff;color:#111;border-radius:18px;padding:16px;margin:0 16px 12px}.info b{font-size:17px}.info p{color:#555;font-size:13px;line-height:1.5;margin:6px 0 0}
-.nav{position:fixed;left:12px;right:12px;bottom:12px;background:#1c1c1c;border:1px solid #333;border-radius:20px;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 0;z-index:20}
-.nav button{background:none;border:none;color:#999;font-size:11px;cursor:pointer}.nav button.on{color:#a6ff00}.nav button i{display:block;font-size:20px;font-style:normal}
-.fab{position:fixed;right:16px;bottom:92px;width:56px;height:56px;border-radius:50%;background:#a6ff00;border:2px solid #111;font-size:28px;z-index:21;cursor:pointer}
-#game{display:none;padding:0 16px}
-.box{background:#fff;color:#111;border-radius:20px;padding:16px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#111;color:#fff;font-family:system-ui,-apple-system,Arial,sans-serif;padding-bottom:110px}
+a{color:inherit}
+/* HEADER */
+.top{padding:14px 16px 0;text-align:center}
+.logoRow{display:flex;align-items:center;justify-content:center;gap:10px}
+.logoRow img{width:44px;height:44px;border-radius:12px;border:2px solid #a6ff00;object-fit:cover;background:#fff}
+.logoTxt{font-size:32px;font-weight:900;color:#a6ff00;letter-spacing:-1px;line-height:1;text-align:left}
+.logoTxt small{display:block;font-size:11px;color:#ccc;letter-spacing:1px;font-weight:600}
+.sub{color:#ccc;font-size:13px;margin-top:6px}
+/* BANNER */
+.bannerWrap{padding:12px 16px 0}
+.banner{width:100%;height:178px;object-fit:cover;object-position:left center;border-radius:20px;border:2px solid #222;display:block;background:#1a1a2e}
+@media(min-width:600px){.banner{height:230px}}
+/* STATS */
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:12px 16px 0}
+.stat{background:#fff;color:#111;border-radius:16px;padding:12px 4px;text-align:center}
+.stat b{display:block;font-size:20px;line-height:1}.stat span{font-size:11px;color:#666}
+.stat small{display:block;font-size:10px;color:#888;margin-top:2px}
+/* SEARCH + FILTER */
+.searchBar{padding:12px 16px 0}
+.searchBar input{width:100%;padding:13px 14px;border-radius:14px;border:2px solid #333;background:#1c1c1c;color:#fff;font-size:14px;outline:none}
+.searchBar input:focus{border-color:#a6ff00}
+.filters{display:flex;gap:8px;overflow-x:auto;padding:10px 16px;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.filters button{white-space:nowrap;padding:9px 14px;border-radius:99px;border:1px solid #333;background:#1c1c1c;color:#ccc;font-weight:700;font-size:12px;cursor:pointer}
+.filters button.on{background:#a6ff00;color:#111;border-color:#a6ff00}
+.sectionTitle{padding:4px 16px 10px;font-weight:900;font-size:17px;display:flex;justify-content:space-between;align-items:center}
+.sectionTitle span{font-size:12px;color:#888;font-weight:600}
+/* GAME CARD */
+.card{background:#fff;color:#111;border-radius:20px;padding:14px;margin:0 16px 10px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.card:active{transform:scale(.98)}
+.icon{width:54px;height:54px;min-width:54px;border-radius:16px;background:#a6ff00;display:grid;place-items:center;font-size:28px;border:2px solid #111}
+.cardMid{flex:1;min-width:0}
+.cardMid b{font-size:16px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cardMid small{color:#666;font-size:12px;display:block;margin-top:1px}
+.prog{height:6px;background:#eee;border-radius:99px;overflow:hidden;margin-top:7px}
+.prog i{display:block;height:100%;background:#a6ff00}
+.progTxt{font-size:11px;color:#888;margin-top:4px}
+.play{background:#a6ff00;border:2px solid #111;border-radius:12px;padding:10px 13px;font-weight:900;font-size:12px;cursor:pointer;white-space:nowrap}
+.play:disabled{background:#e5e5e5;color:#999}
+.tag{font-size:10px;background:#111;color:#a6ff00;padding:3px 7px;border-radius:99px;margin-left:6px;vertical-align:middle}
+/* INFO */
+.info{background:#fff;color:#111;border-radius:20px;padding:16px;margin:4px 16px 12px}
+.info b{font-size:16px}.info p{color:#555;font-size:13px;line-height:1.55;margin:6px 0 0}
+.info ol{margin:8px 0 0;padding-left:18px;color:#555;font-size:13px;line-height:1.6}
+/* GAME PAGE */
+#gamePage,#shopPage,#rankPage,#profilePage{display:none;padding:0 16px}
+.backBtn{width:100%;padding:13px;border:2px solid #333;border-radius:14px;background:#1c1c1c;color:#fff;font-weight:800;font-size:14px;margin:12px 0;cursor:pointer}
+.box{background:#fff;color:#111;border-radius:22px;padding:18px}
 .q{font-size:20px;font-weight:800;line-height:1.35}
-.hint{font-size:13px;color:#666;margin-top:8px}
-img.qimg{width:100%;max-height:240px;object-fit:contain;background:#eee;border-radius:14px;margin:12px 0}
-input{width:100%;padding:14px;border-radius:12px;border:2px solid #111;font-size:16px;margin-top:12px;outline:none}
-button.big{width:100%;padding:14px;border:2px solid #111;border-radius:12px;background:#a6ff00;font-weight:900;font-size:16px;margin-top:10px;cursor:pointer}button.big.sec{background:#fff}
-.res{padding:12px;border-radius:12px;margin-top:12px;display:none;font-size:14px}.res.ok{background:#d9ffd9}.res.no{background:#ffd9d9}
+.hint{font-size:13px;color:#666;margin-top:8px;line-height:1.4}
+img.qimg{width:100%;max-height:250px;object-fit:contain;background:#f0f0f0;border-radius:14px;margin:12px 0}
+input.ans{width:100%;padding:14px;border-radius:14px;border:2px solid #111;font-size:16px;margin-top:12px;outline:none}
+input.ans:focus{border-color:#a6ff00}
+button.big{width:100%;padding:14px;border:2px solid #111;border-radius:14px;background:#a6ff00;font-weight:900;font-size:16px;margin-top:10px;cursor:pointer}
+button.big.sec{background:#fff}
+.res{padding:12px;border-radius:12px;margin-top:12px;display:none;font-size:14px;line-height:1.4}.res.ok{background:#d9ffd9}.res.no{background:#ffd9d9}
 audio{width:100%;margin-top:10px}.meta{font-size:12px;color:#888;text-align:center;margin-top:10px}
-.shopItem{display:flex;justify-content:space-between;align-items:center;background:#f3f3f3;border-radius:12px;padding:12px;margin-bottom:10px;color:#111}.shopItem b{font-size:14px}.shopItem small{color:#666}
-.rankRow{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee;color:#111;font-size:14px}
+.shopItem{display:flex;justify-content:space-between;align-items:center;background:#f5f5f5;border-radius:14px;padding:12px;margin-bottom:10px;color:#111}
+.rankRow{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid #eee;color:#111;font-size:14px}
+.empty{text-align:center;color:#888;padding:30px 16px;font-size:13px}
+/* NAV */
+.nav{position:fixed;left:12px;right:12px;bottom:12px;background:#1c1c1c;border:1px solid #333;border-radius:22px;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 0;z-index:20}
+.nav button{background:none;border:none;color:#999;font-size:11px;cursor:pointer}
+.nav button.on{color:#a6ff00}.nav button i{display:block;font-size:20px;font-style:normal}
+.fab{position:fixed;right:16px;bottom:94px;width:56px;height:56px;border-radius:50%;background:#a6ff00;border:2px solid #111;font-size:28px;z-index:21;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.4)}
 </style>
 </head>
 <body>
+
+<!-- HOME -->
 <div id="homePage">
-<div class="top"><div class="logo">Anya Quest</div><div class="sub">Pilih quest kamu, kumpulin koin, naik level!</div>
-<div class="stats">
-<div class="stat"><b id="coin">0</b><span>Koin</span></div>
-<div class="stat"><b id="xp">0</b><span>XP</span></div>
-<div class="stat"><b id="lvlTxt">Lv 1</b><span id="rankTxt">Pemula</span></div>
-</div></div>
-<div id="list"></div>
-<div class="info"><b>Cara Main</b><p>Jawab benar = +10 XP + 10 Koin. Koin bisa dipakai di Shop untuk beli Hint dan Skip. XP naik = Level naik = Rank naik. Semua tersimpan di HP kamu (akun local). Limit: 5 soal / hari / game.</p></div>
+  <div class="top">
+    <div class="logoRow">
+      <img src="https://files.catbox.moe/yv8lrg.png" alt="Logo Anya Quest">
+      <div class="logoTxt">Anya Quest<small>YOUR ADVENTURE, YOUR CHALLENGE!</small></div>
+    </div>
+    <div class="sub">Pilih quest kamu, kumpulin koin, naik level!</div>
+  </div>
+
+  <div class="bannerWrap">
+    <img class="banner" src="https://files.catbox.moe/tt0pw1.png" alt="Anya Quest Banner">
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b id="coin">0</b><span>Koin</span><small>Buat beli Hint</small></div>
+    <div class="stat"><b id="xp">0</b><span>XP</span><small>Naik level</small></div>
+    <div class="stat"><b id="lvlTxt">Lv 1</b><span id="rankTxt">Pemula</span><small id="xpNext">0 / 100 XP</small></div>
+  </div>
+
+  <div class="searchBar"><input id="searchInput" placeholder="🔍 Cari game... contoh: bendera, lagu, ML" oninput="renderList()"></div>
+  <div class="filters" id="filters"></div>
+
+  <div class="sectionTitle"><span>🎮 Daftar Quest</span><span id="countTxt"></span></div>
+  <div id="list"></div>
+
+  <div class="info"><b>📖 Cara Main</b>
+    <ol>
+      <li>Pilih quest, jawab 5 soal hari ini</li>
+      <li>Jawab benar = <b>+10 XP +10 Koin</b></li>
+      <li>Koin dipake di Shop buat beli Hint / Skip / Extra Soal</li>
+      <li>XP naik = Level naik = Rank naik dari Pemula sampe Legenda</li>
+      <li>Limit ke-reset tiap hari jam 00:00</li>
+    </ol>
+  </div>
+  <div class="info"><b>⚡ Tips</b><p>Stuck? Jangan langsung skip, beli Hint dulu 20 Koin, lebih murah dari Skip 30 Koin. Kalo limit abis, pindah game lain aja, masih ada 14 game lagi.</p></div>
 </div>
 
-<div id="game">
-<button class="big sec" onclick="goHome()">← Kembali</button>
-<div class="box" style="margin-top:12px">
-<div id="gtitle" style="font-weight:900"></div><div id="gprog" class="hint"></div>
-<div id="qarea" style="margin-top:10px"></div>
-<input id="ans" placeholder="Ketik jawaban kamu..." autocomplete="off">
-<button class="big" onclick="check()">JAWAB ✅</button>
-<button class="big sec" onclick="buyHint()">BELI HINT 💡 (20 Koin)</button>
-<button class="big sec" onclick="buySkip()">SKIP SOAL ⏭️ (30 Koin)</button>
-<div id="res" class="res"></div>
-<button id="nextBtn" class="big" style="display:none" onclick="nextQ()">SOAL BERIKUTNYA →</button>
-</div>
-<div class="meta" id="ginfo"></div>
-</div>
-
-<div id="shopPage" style="display:none;padding:0 16px">
-<h2 style="text-align:center">🛒 Shop</h2>
-<div class="box"><div class="shopItem"><div><b>Hint Pack x1</b><br><small>Buka hint 1 soal</small></div><button class="play" onclick="shopBuy('hint',20)">20 KOIN</button></div>
-<div class="shopItem"><div><b>Skip x1</b><br><small>Lewati soal yang susah</small></div><button class="play" onclick="shopBuy('skip',30)">30 KOIN</button></div>
-<div class="shopItem"><div><b>Extra Soal Hari Ini</b><br><small>+5 soal buat 1 game</small></div><button class="play" onclick="shopBuy('extra',50)">50 KOIN</button></div>
-<div class="hint">Hint / Skip / Extra yang dibeli tersimpan, kepake otomatis pas main.</div></div>
+<!-- GAME -->
+<div id="gamePage">
+  <button class="backBtn" onclick="goHome()">← Kembali ke Menu</button>
+  <div class="box">
+    <div id="gtitle" style="font-weight:900;font-size:18px"></div>
+    <div id="gprog" class="hint"></div>
+    <div id="qarea" style="margin-top:10px"></div>
+    <input class="ans" id="ans" placeholder="Ketik jawaban kamu..." autocomplete="off">
+    <button class="big" onclick="check()">JAWAB ✅</button>
+    <button class="big sec" onclick="buyHint()">💡 BELI HINT (20 Koin) • Sisa Hint: <span id="hintCount">0</span></button>
+    <button class="big sec" onclick="buySkip()">⏭️ SKIP SOAL (30 Koin) • Sisa Skip: <span id="skipCount">0</span></button>
+    <div id="res" class="res"></div>
+    <button id="nextBtn" class="big" style="display:none" onclick="nextQ()">SOAL BERIKUTNYA →</button>
+  </div>
+  <div class="meta" id="ginfo"></div>
 </div>
 
-<div id="rankPage" style="display:none;padding:0 16px">
-<h2 style="text-align:center">🏆 Rank</h2>
-<div class="box" id="rankList"></div>
-<div class="info"><b>Rank kamu</b><p id="myRank"></p></div>
+<!-- SHOP -->
+<div id="shopPage">
+  <h2 style="text-align:center">🛒 Shop</h2>
+  <div class="box">
+    <div class="shopItem"><div><b>💡 Hint Pack x1</b><br><small>Buka hint 1 soal</small></div><button class="play" onclick="shopBuy('hint',20)">20 KOIN</button></div>
+    <div class="shopItem"><div><b>⏭️ Skip x1</b><br><small>Lewati soal susah</small></div><button class="play" onclick="shopBuy('skip',30)">30 KOIN</button></div>
+    <div class="shopItem"><div><b>➕ Extra Soal +5</b><br><small>+5 soal buat 1 game hari ini</small></div><button class="play" onclick="shopBuy('extra',50)">50 KOIN</button></div>
+    <div class="hint">Hint / Skip yang dibeli tersimpan, kepake pas kamu pencet tombolnya di dalem game.</div>
+  </div>
 </div>
 
-<div id="profilePage" style="display:none;padding:0 16px">
-<h2 style="text-align:center">👤 Profile</h2>
-<div class="box">
-<div style="font-size:48px;text-align:center">🤖</div>
-<div style="text-align:center;font-weight:900;font-size:20px">Pemain Anya</div>
-<div style="text-align:center;color:#666" id="profSub"></div>
-<div style="margin-top:14px"><div class="rankRow"><span>Total XP</span><b id="pXp"></b></div><div class="rankRow"><span>Total Koin</span><b id="pCoin"></b></div><div class="rankRow"><span>Jawaban Benar</span><b id="pBenar"></b></div><div class="rankRow"><span>Streak</span><b id="pStreak"></b></div></div>
-<button class="big sec" onclick="resetAll()">Reset Semua Data</button>
+<!-- RANK -->
+<div id="rankPage">
+  <h2 style="text-align:center">🏆 Rank</h2>
+  <div class="box" id="rankList"></div>
+  <div class="info"><b>Rank Kamu</b><p id="myRank"></p></div>
 </div>
+
+<!-- PROFILE -->
+<div id="profilePage">
+  <h2 style="text-align:center">👤 Profile</h2>
+  <div class="box">
+    <div style="text-align:center"><img src="https://files.catbox.moe/yv8lrg.png" style="width:72px;height:72px;border-radius:20px;border:2px solid #111;object-fit:cover"></div>
+    <div style="text-align:center;font-weight:900;font-size:20px;margin-top:8px">Pemain Anya</div>
+    <div style="text-align:center;color:#666;font-size:13px" id="profSub"></div>
+    <div style="margin-top:14px">
+      <div class="rankRow"><span>Total XP</span><b id="pXp"></b></div>
+      <div class="rankRow"><span>Total Koin</span><b id="pCoin"></b></div>
+      <div class="rankRow"><span>Jawaban Benar</span><b id="pBenar"></b></div>
+      <div class="rankRow"><span>Streak</span><b id="pStreak"></b></div>
+      <div class="rankRow"><span>Hint Tersimpan</span><b id="pHint"></b></div>
+      <div class="rankRow"><span>Skip Tersimpan</span><b id="pSkip"></b></div>
+    </div>
+    <button class="big sec" onclick="resetAll()">Reset Semua Data</button>
+  </div>
 </div>
 
 <button class="fab" onclick="alert('Halo! Aku Anya 🤖\nPilih quest, jawab 5 soal hari ini, kumpulin koin buat beli Hint di Shop!')">🤖</button>
 
 <nav class="nav">
-<button class="on" id="navHome" onclick="showTab('home')"><i>🏠</i>Home</button>
-<button id="navRank" onclick="showTab('rank')"><i>🏆</i>Rank</button>
-<button id="navShop" onclick="showTab('shop')"><i>🛒</i>Shop</button>
-<button id="navProfile" onclick="showTab('profile')"><i>👤</i>Profile</button>
+  <button class="on" id="navHome" onclick="showTab('home')"><i>🏠</i>Home</button>
+  <button id="navRank" onclick="showTab('rank')"><i>🏆</i>Rank</button>
+  <button id="navShop" onclick="showTab('shop')"><i>🛒</i>Shop</button>
+  <button id="navProfile" onclick="showTab('profile')"><i>👤</i>Profile</button>
 </nav>
 
 <script>
 const TODAY=new Date().toISOString().slice(0,10);
 let S=JSON.parse(localStorage.getItem('anyaquest_pro')||'null')||{xp:0,coin:0,benar:0,streak:0,played:{},hints:0,skips:0,extra:{},date:TODAY};
-if(S.date!==TODAY){S.played={};S.extra={};S.date=TODAY;}
-function save(){localStorage.setItem('anyaquest_pro',JSON.stringify(S));render();}
-function rankName(xp){if(xp>=1000)return 'Legenda';if(xp>=500)return 'Master';if(xp>=200)return 'Pro';if(xp>=50)return 'Rising';return 'Pemula';}
-function render(){
-document.getElementById('coin').textContent=S.coin;
-document.getElementById('xp').textContent=S.xp;
-document.getElementById('lvlTxt').textContent='Lv '+(Math.floor(S.xp/100)+1);
-document.getElementById('rankTxt').textContent=rankName(S.xp);
-document.getElementById('profSub').textContent='Lv '+(Math.floor(S.xp/100)+1)+' • '+rankName(S.xp);
-document.getElementById('pXp').textContent=S.xp;document.getElementById('pCoin').textContent=S.coin;document.getElementById('pBenar').textContent=S.benar;document.getElementById('pStreak').textContent=S.streak+' 🔥';
-document.getElementById('myRank').textContent='Kamu di Lv '+(Math.floor(S.xp/100)+1)+' ('+rankName(S.xp)+') dengan '+S.xp+' XP. Terus main biar naik ke Legenda!';
-let ranks=[['Kamu',S.xp],['Anya Bot',850],['Raja Kuis',620],['Si Paling Tau',400],['Pemula Hebat',120]].sort((a,b)=>b[1]-a[1]);
-document.getElementById('rankList').innerHTML=ranks.map((r,i)=>`<div class="rankRow"><span>${i+1}. ${r[0]}</span><b>${r[1]} XP</b></div>`).join('');
-let html=GAMES.map(g=>{
-let done=S.played[g.id]||0, max=5+(S.extra[g.id]||0), locked=done>=max;
-return `<div class="card" onclick="start('${g.id}')"><div class="icon">${g.emo}</div><div><b>${g.name}</b><small>${g.count} • ${g.desc} • ${done}/${max} hari ini</small></div><button class="play" ${locked?'disabled':''}>${locked?'ABIS':'PLAY'}</button></div>`}).join('');
-document.getElementById('list').innerHTML=html;
-}
+if(S.date!==TODAY){S.played={};S.extra={};S.date=TODAY;localStorage.setItem('anyaquest_pro',JSON.stringify(S));}
+let activeFilter='Semua';
+const FILTERS=['Semua','Utama','Visual','Edukasi','Bonus'];
 const GAMES=[
-{id:'tebakgambar',file:'tebakgambar.json',emo:'🖼️',name:'Tebak Gambar',desc:'Tebak dari gambar',count:'1000 Soal'},
-{id:'family100',file:'family100.json',emo:'👨‍👩‍👧',name:'Family 100',desc:'Tebak jawaban terbanyak',count:'7152 Soal'},
-{id:'tebaktebakan',file:'tebaktebakan.json',emo:'😂',name:'Tebak-Tebakan',desc:'Tebak plesetan lucu',count:'199 Soal'},
-{id:'siapakahaku',file:'siapakahaku.json',emo:'❓',name:'Siapakah Aku',desc:'Tebak campur semua',count:'268 Soal'},
-{id:'susunkata',file:'susunkata.json',emo:'🔤',name:'Susun Kata',desc:'Susun huruf jadi kata',count:'353 Soal'},
-{id:'tebaklogo',file:'tebaklogo.json',emo:'🧩',name:'Tebak Logo',desc:'Tebak dari gambar',count:'153 Soal'},
-{id:'tebakbendera',file:'tebakbendera.json',emo:'🏳️',name:'Tebak Bendera',desc:'Tebak negara',count:'246 Negara'},
-{id:'tebakbenda',file:'tebakbenda.json',emo:'📦',name:'Tebak Benda',desc:'Tebak benda sekitar',count:'100 Soal'},
-{id:'tebakbuah',file:'tebakbuah.json',emo:'🍉',name:'Tebak Buah',desc:'Buat pemula',count:'25 Buah'},
-{id:'tebakkimia',file:'tebakkimia.json',emo:'🧪',name:'Tebak Kimia',desc:'Tebak unsur / lambang',count:'116 Unsur'},
-{id:'kbbi',file:'kbbi.json',emo:'📖',name:'KBBI Acak Kata',desc:'Susun kata KBBI',count:'28307 Kata'},
-{id:'tebakanml',file:'tebakanml.json',emo:'🎮',name:'Tebakan ML',desc:'Khusus anak ML',count:'48 Soal'},
-{id:'tebakgame',file:'tebakgame.json',emo:'🕹️',name:'Tebak Game',desc:'Game nostalgia',count:'37 Soal'},
-{id:'tebaklagu',file:'tebaklagu.json',emo:'🎵',name:'Tebak Lagu',desc:'Dengerin dulu',count:'40 Lagu'},
-{id:'tebaklirik',file:'tebaklirik.json',emo:'🎤',name:'Tebak Lirik',desc:'Isi lirik yang hilang',count:'37 Soal'},
+{id:'tebakgambar',file:'tebakgambar.json',emo:'🖼️',name:'Tebak Gambar',desc:'Tebak dari gambar',count:'1000 Soal',cat:'Utama'},
+{id:'family100',file:'family100.json',emo:'👨‍👩‍👧',name:'Family 100',desc:'Tebak jawaban terbanyak',count:'7152 Soal',cat:'Utama'},
+{id:'tebaktebakan',file:'tebaktebakan.json',emo:'😂',name:'Tebak-Tebakan',desc:'Tebak plesetan lucu',count:'199 Soal',cat:'Utama'},
+{id:'siapakahaku',file:'siapakahaku.json',emo:'❓',name:'Siapakah Aku',desc:'Tebak campur semua',count:'268 Soal',cat:'Utama'},
+{id:'susunkata',file:'susunkata.json',emo:'🔤',name:'Susun Kata',desc:'Susun huruf jadi kata',count:'353 Soal',cat:'Utama'},
+{id:'tebaklogo',file:'tebaklogo.json',emo:'🧩',name:'Tebak Logo',desc:'Tebak dari gambar',count:'153 Soal',cat:'Visual'},
+{id:'tebakbendera',file:'tebakbendera.json',emo:'🏳️',name:'Tebak Bendera',desc:'Tebak negara',count:'246 Negara',cat:'Visual'},
+{id:'tebakbenda',file:'tebakbenda.json',emo:'📦',name:'Tebak Benda',desc:'Tebak benda sekitar',count:'100 Soal',cat:'Visual'},
+{id:'tebakbuah',file:'tebakbuah.json',emo:'🍉',name:'Tebak Buah',desc:'Buat pemula',count:'25 Buah',cat:'Visual'},
+{id:'tebakkimia',file:'tebakkimia.json',emo:'🧪',name:'Tebak Kimia',desc:'Tebak unsur / lambang',count:'116 Unsur',cat:'Edukasi'},
+{id:'kbbi',file:'kbbi.json',emo:'📖',name:'KBBI Acak Kata',desc:'Susun kata KBBI',count:'28307 Kata',cat:'Edukasi'},
+{id:'tebakanml',file:'tebakanml.json',emo:'🎮',name:'Tebakan ML',desc:'Khusus anak ML',count:'48 Soal',cat:'Bonus'},
+{id:'tebakgame',file:'tebakgame.json',emo:'🕹️',name:'Tebak Game',desc:'Game nostalgia',count:'37 Soal',cat:'Bonus'},
+{id:'tebaklagu',file:'tebaklagu.json',emo:'🎵',name:'Tebak Lagu',desc:'Dengerin dulu',count:'40 Lagu',cat:'Bonus'},
+{id:'tebaklirik',file:'tebaklirik.json',emo:'🎤',name:'Tebak Lirik',desc:'Isi lirik yang hilang',count:'37 Soal',cat:'Bonus'},
 ];
+function save(){localStorage.setItem('anyaquest_pro',JSON.stringify(S));renderTop();}
+function rankName(xp){if(xp>=1000)return 'Legenda';if(xp>=500)return 'Master';if(xp>=200)return 'Pro';if(xp>=50)return 'Rising';return 'Pemula';}
+function renderTop(){
+  document.getElementById('coin').textContent=S.coin;
+  document.getElementById('xp').textContent=S.xp;
+  document.getElementById('lvlTxt').textContent='Lv '+(Math.floor(S.xp/100)+1);
+  document.getElementById('rankTxt').textContent=rankName(S.xp);
+  document.getElementById('xpNext').textContent=(S.xp%100)+' / 100 XP';
+  document.getElementById('profSub').textContent='Lv '+(Math.floor(S.xp/100)+1)+' • '+rankName(S.xp);
+  document.getElementById('pXp').textContent=S.xp;document.getElementById('pCoin').textContent=S.coin;document.getElementById('pBenar').textContent=S.benar;document.getElementById('pStreak').textContent=S.streak+' 🔥';document.getElementById('pHint').textContent=S.hints;document.getElementById('pSkip').textContent=S.skips;
+  document.getElementById('hintCount').textContent=S.hints;document.getElementById('skipCount').textContent=S.skips;
+  document.getElementById('myRank').textContent='Kamu di Lv '+(Math.floor(S.xp/100)+1)+' ('+rankName(S.xp)+') dengan '+S.xp+' XP. Terus main biar naik ke Legenda!';
+  let ranks=[['Kamu',S.xp],['Anya Bot',850],['Raja Kuis',620],['Si Paling Tau',400],['Pemula Hebat',120]].sort((a,b)=>b[1]-a[1]);
+  document.getElementById('rankList').innerHTML=ranks.map((r,i)=>`<div class="rankRow"><span>${i+1}. ${r[0]}</span><b>${r[1]} XP</b></div>`).join('');
+}
+function renderFilters(){
+  document.getElementById('filters').innerHTML=FILTERS.map(f=>`<button class="${f===activeFilter?'on':''}" onclick="setFilter('${f}')">${f}</button>`).join('');
+}
+function setFilter(f){activeFilter=f;renderFilters();renderList();}
+function renderList(){
+  let q=(document.getElementById('searchInput').value||'').toLowerCase();
+  let list=GAMES.filter(g=>(activeFilter==='Semua'||g.cat===activeFilter)&&(g.name.toLowerCase().includes(q)||g.desc.toLowerCase().includes(q)));
+  document.getElementById('countTxt').textContent=list.length+' game';
+  if(!list.length){document.getElementById('list').innerHTML='<div class="empty">Gak ketemu 🗿<br>Coba kata lain, contoh: lagu, bendera, ML</div>';return;}
+  document.getElementById('list').innerHTML=list.map(g=>{
+    let done=S.played[g.id]||0,max=5+(S.extra[g.id]||0),locked=done>=max,pct=Math.min(100,Math.round(done/max*100));
+    return `<div class="card" onclick="start('${g.id}')"><div class="icon">${g.emo}</div><div class="cardMid"><b>${g.name}<span class="tag">${g.cat.toUpperCase()}</span></b><small>${g.count} • ${g.desc}</small><div class="prog"><i style="width:${pct}%"></i></div><div class="progTxt">${done}/${max} soal hari ini ${locked?'• ABIS, besok lagi':''}</div></div><button class="play" ${locked?'disabled':''}>${locked?'ABIS':'PLAY'}</button></div>`;
+  }).join('');
+}
 function showTab(t){
-['home','rank','shop','profile'].forEach(k=>{
-document.getElementById(k==='home'?'homePage':k+'Page').style.display=(t===k?'block':'none');
-document.getElementById('nav'+k[0].toUpperCase()+k.slice(1)).classList.toggle('on',t===k);
-});
-document.getElementById('game').style.display='none';
+  ['home','rank','shop','profile'].forEach(k=>{
+    document.getElementById(k==='home'?'homePage':k+'Page').style.display=(t===k?'block':'none');
+    document.getElementById('nav'+k[0].toUpperCase()+k.slice(1)).classList.toggle('on',t===k);
+  });
+  document.getElementById('gamePage').style.display='none';
+  window.scrollTo({top:0});
 }
 function goHome(){showTab('home');}
 function shopBuy(type,price){
-if(S.coin<price){alert('Koin kurang 🗿\nMain dulu biar dapet koin!');return;}
-S.coin-=price; if(type==='hint')S.hints++; if(type==='skip')S.skips++; if(type==='extra'){let g=prompt('Extra buat game apa? Tulis id nya, contoh: tebakgambar'); if(GAMES.find(x=>x.id===g)) S.extra[g]=(S.extra[g]||0)+5;}
-save(); alert('Berhasil beli! ✅');
+  if(S.coin<price){alert('Koin kurang 🗿\nMain dulu biar dapet koin!');return;}
+  S.coin-=price;
+  if(type==='hint')S.hints++;
+  if(type==='skip')S.skips++;
+  if(type==='extra'){let g=prompt('Extra buat game apa? Tulis nama game nya, contoh: tebakgambar');if(GAMES.find(x=>x.id===g))S.extra[g]=(S.extra[g]||0)+5;else alert('Nama game nya salah, coba lagi ya');}
+  save();alert('Berhasil beli! ✅');
 }
-function resetAll(){if(confirm('Reset semua?')){localStorage.removeItem('anyaquest_pro');location.reload();}}
+function resetAll(){if(confirm('Reset semua? XP + Koin ilang semua loh.')){localStorage.removeItem('anyaquest_pro');location.reload();}}
 function norm(s){return String(s||'').toLowerCase().trim().replace(/\s+/g,' ');}
 function uniq(a,k){let s={},o=[];a.forEach(x=>{let kk=k(x);if(!s[kk]){s[kk]=1;o.push(x)}});return o;}
 function shuffle(a){return [...a].sort(()=>Math.random()-.5);}
 function normalize(id,raw){
-let d=Array.isArray(raw)?raw:(raw.data||[]);
-if(id==='kbbi') return shuffle(d.filter(x=>typeof x==='string'&&x.length>=4&&x.length<=10)).slice(0,500).map(w=>({q:'Susun kata ini: '+shuffle(w.split('')).join(' ').toUpperCase(),a:[w],hint:'Kata '+w.length+' huruf, awal: '+w[0].toUpperCase()}));
-if(id==='tebakkimia'){let u=uniq(d.filter(x=>x.unsur&&x.lambang),x=>norm(x.unsur));return shuffle(u).map(x=>Math.random()>.5?{q:`Apa lambang kimia dari ${x.unsur}?`,a:[x.lambang],hint:'Huruf pertama BESAR, kedua kecil. Contoh: Au',caseSensitive:true}:{q:`Unsur apa yang lambangnya ${x.lambang}?`,a:[x.unsur],hint:'Nama unsur Bahasa Indonesia'});}
-if(id==='tebakbendera'){let fix={'DO':'Republik Dominika','DM':'Dominica','CG':'Kongo','CD':'Kongo Demokratik','KP':'Korea Utara','KR':'Korea Selatan'};return shuffle(d.filter(x=>x.name)).map(x=>({q:'Bendera negara apa ini?',img:x.img||x.flag,a:[fix[x.flag]||x.name,x.name],hint:'Kode: '+x.flag}));}
-if(id==='tebakgambar') return shuffle(d.filter(x=>x.jawaban)).map(x=>({q:'Tebak gambar ini!',img:x.img,a:[x.jawaban],hint:x.deskripsi||'Perhatikan gambarnya'}));
-if(id==='tebaklogo'||id==='tebakgame') return shuffle(d.filter(x=>x.jawaban||x.name)).map(x=>{let ans=x.jawaban||x.name,ex=[];if(norm(ans).includes('grand theft auto'))ex=['gta','gta sa','gta v'];if(norm(ans).includes('player unknowns'))ex=['pubg'];if(norm(ans).includes('mobile legends'))ex=['ml','mlbb'];return {q:'Logo / gambar apa ini?',img:x.img||x.image||x.logo,a:[ans,...ex],hint:'Perhatikan gambarnya'};});
-if(id==='tebaklagu') return shuffle(d.filter(x=>x.lagu&&!x.lagu.endsWith('/song/.mp3')&&x.judul)).map(x=>({q:'Dengerin lagunya, tebak JUDUL nya!',audio:x.lagu,a:[x.judul],hint:'Artisnya: '+x.artis}));
-if(id==='tebaklirik') return shuffle(d.filter(x=>{let j=String(x.jawaban||'');if(norm(j)==='jawaban')return false;if(j.split(' ').length>3)return false;return x.soal&&j;})).map(x=>({q:x.soal,a:[x.jawaban],hint:'Isi kata yang hilang (______)'}));
-if(id==='tebakbuah'){let c=d.map(x=>{let s=String(x.soal||'').replace(/^(Aku adalah buah\. Petunjuk:|Tebak buah ini:|Coba tebak!|Buah apakah ini?|Game tebak buah:)\s*/i,'');return {q:'Buah apa ini? '+s,a:[x.jawaban],hint:'Buah-buahan'}});return shuffle(uniq(c,x=>norm(x.q)));}
-if(id==='tebakbenda') return shuffle(d.filter(x=>x.question)).map(x=>({q:x.question,a:x.answer,hint:'Benda di sekitar kamu'}));
-if(id==='family100') return shuffle(d.filter(x=>x.soal&&Array.isArray(x.jawaban))).map(x=>({q:x.soal,a:x.jawaban,hint:'Tebak 1 jawaban yang paling banyak dipilih orang'}));
-return shuffle(d.filter(x=>x.soal||x.question)).map(x=>{let q=x.soal||x.question,a=x.jawaban||x.answer;if(!Array.isArray(a))a=[a];return {q,a,hint:id==='susunkata'?'Susun hurufnya jadi kata yang benar':'Jawab dengan 1 kata / kalimat pendek'};});
+  let d=Array.isArray(raw)?raw:(raw.data||[]);
+  if(id==='kbbi') return shuffle(d.filter(x=>typeof x==='string'&&x.length>=4&&x.length<=10)).slice(0,500).map(w=>({q:'Susun kata ini: '+shuffle(w.split('')).join(' ').toUpperCase(),a:[w],hint:'Kata '+w.length+' huruf, awal: '+w[0].toUpperCase()}));
+  if(id==='tebakkimia'){let u=uniq(d.filter(x=>x.unsur&&x.lambang),x=>norm(x.unsur));return shuffle(u).map(x=>Math.random()>.5?{q:`Apa lambang kimia dari ${x.unsur}?`,a:[x.lambang],hint:'Huruf pertama BESAR, kedua kecil. Contoh: Au',caseSensitive:true}:{q:`Unsur apa yang lambangnya ${x.lambang}?`,a:[x.unsur],hint:'Nama unsur Bahasa Indonesia'});}
+  if(id==='tebakbendera'){let fix={'DO':'Republik Dominika','DM':'Dominica','CG':'Kongo','CD':'Kongo Demokratik','KP':'Korea Utara','KR':'Korea Selatan'};return shuffle(d.filter(x=>x.name)).map(x=>({q:'Bendera negara apa ini?',img:x.img||x.flag,a:[fix[x.flag]||x.name,x.name],hint:'Kode: '+x.flag}));}
+  if(id==='tebakgambar') return shuffle(d.filter(x=>x.jawaban)).map(x=>({q:'Tebak gambar ini!',img:x.img,a:[x.jawaban],hint:x.deskripsi||'Perhatikan gambarnya'}));
+  if(id==='tebaklogo'||id==='tebakgame') return shuffle(d.filter(x=>x.jawaban||x.name)).map(x=>{let ans=x.jawaban||x.name,ex=[];if(norm(ans).includes('grand theft auto'))ex=['gta','gta sa','gta v'];if(norm(ans).includes('player unknowns'))ex=['pubg'];if(norm(ans).includes('mobile legends'))ex=['ml','mlbb'];return {q:'Logo / gambar apa ini?',img:x.img||x.image||x.logo,a:[ans,...ex],hint:'Perhatikan gambarnya'};});
+  if(id==='tebaklagu') return shuffle(d.filter(x=>x.lagu&&!x.lagu.endsWith('/song/.mp3')&&x.judul)).map(x=>({q:'Dengerin lagunya, tebak JUDUL nya!',audio:x.lagu,a:[x.judul],hint:'Artisnya: '+x.artis}));
+  if(id==='tebaklirik') return shuffle(d.filter(x=>{let j=String(x.jawaban||'');if(norm(j)==='jawaban')return false;if(j.split(' ').length>3)return false;return x.soal&&j;})).map(x=>({q:x.soal,a:[x.jawaban],hint:'Isi kata yang hilang (______)'}));
+  if(id==='tebakbuah'){let c=d.map(x=>{let s=String(x.soal||'').replace(/^(Aku adalah buah\. Petunjuk:|Tebak buah ini:|Coba tebak!|Buah apakah ini?|Game tebak buah:)\s*/i,'');return {q:'Buah apa ini? '+s,a:[x.jawaban],hint:'Buah-buahan'}});return shuffle(uniq(c,x=>norm(x.q)));}
+  if(id==='tebakbenda') return shuffle(d.filter(x=>x.question)).map(x=>({q:x.question,a:x.answer,hint:'Benda di sekitar kamu'}));
+  if(id==='family100') return shuffle(d.filter(x=>x.soal&&Array.isArray(x.jawaban))).map(x=>({q:x.soal,a:x.jawaban,hint:'Tebak 1 jawaban yang paling banyak dipilih orang'}));
+  return shuffle(d.filter(x=>x.soal||x.question)).map(x=>{let q=x.soal||x.question,a=x.jawaban||x.answer;if(!Array.isArray(a))a=[a];return {q,a,hint:id==='susunkata'?'Susun hurufnya jadi kata yang benar':'Jawab dengan 1 kata / kalimat pendek'};});
 }
 let cur=null,list=[],idx=0,daily=0,currentQ=null;
 async function start(id){
-let g=GAMES.find(x=>x.id===id), max=5+(S.extra[id]||0);
-if((S.played[id]||0)>=max){alert('Limit hari ini abis buat '+g.name+' 🗿\nCoba game lain / beli Extra di Shop!');return;}
-showTab('home'); document.getElementById('homePage').style.display='none'; document.getElementById('game').style.display='block';
-document.getElementById('gtitle').textContent=g.emo+' '+g.name; document.getElementById('ginfo').textContent='Jawab benar +10 XP +10 Koin. Hint 20 Koin, Skip 30 Koin.';
-try{let r=await fetch(g.file); list=normalize(id,await r.json());}catch(e){document.getElementById('qarea').innerHTML='<div class=q>Gagal load '+g.file+' 😭</div><div class=hint>Cek nama file di GitHub, huruf besar kecil ngaruh.</div>';return;}
-cur=g;idx=0;daily=0;nextQ();
+  let g=GAMES.find(x=>x.id===id),max=5+(S.extra[id]||0);
+  if((S.played[id]||0)>=max){alert('Limit hari ini abis buat '+g.name+' 🗿\nCoba game lain / beli Extra di Shop!');return;}
+  showTab('home');document.getElementById('homePage').style.display='none';document.getElementById('gamePage').style.display='block';
+  document.getElementById('gtitle').textContent=g.emo+' '+g.name;document.getElementById('ginfo').textContent='Jawab benar +10 XP +10 Koin. Hint 20 Koin, Skip 30 Koin.';
+  try{let r=await fetch(g.file);list=normalize(id,await r.json());}catch(e){document.getElementById('qarea').innerHTML='<div class=q>Gagal load '+g.file+' 😭</div><div class=hint>Cek nama file di GitHub, huruf besar kecil ngaruh.</div>';return;}
+  cur=g;idx=0;daily=0;nextQ();window.scrollTo({top:0});
 }
 function nextQ(){
-if(daily>=5){alert('Limit 5 soal abis! 🎉\nBesok lanjut lagi ya.');goHome();return;}
-if(idx>=list.length)idx=0; currentQ=list[idx++];
-document.getElementById('res').style.display='none';document.getElementById('nextBtn').style.display='none';document.getElementById('ans').value='';
-document.getElementById('gprog').textContent='Soal ke-'+(daily+1)+' dari 5 hari ini';
-let h='<div class=q>'+currentQ.q+'</div>';
-if(currentQ.img)h+=`<img class="qimg" src="${currentQ.img}" onerror="this.style.display='none'">`;
-if(currentQ.audio)h+=`<audio controls controlsList="nodownload"><source src="${currentQ.audio}"></audio><div class=hint>Dengerin 10-15 detik pertama aja.</div>`;
-h+='<div class=hint id=hintBox style="display:none">💡 Hint: '+currentQ.hint+'</div>';
-document.getElementById('qarea').innerHTML=h;document.getElementById('ans').focus();
+  if(daily>=5){alert('Limit 5 soal abis! 🎉\nBesok lanjut lagi ya.');goHome();return;}
+  if(idx>=list.length)idx=0;currentQ=list[idx++];
+  document.getElementById('res').style.display='none';document.getElementById('nextBtn').style.display='none';document.getElementById('ans').value='';
+  document.getElementById('gprog').textContent='Soal ke-'+(daily+1)+' dari 5 hari ini • XP + Koin nunggu kamu';
+  let h='<div class=q>'+currentQ.q+'</div>';
+  if(currentQ.img)h+=`<img class="qimg" src="${currentQ.img}" onerror="this.style.display='none'">`;
+  if(currentQ.audio)h+=`<audio controls controlsList="nodownload"><source src="${currentQ.audio}"></audio><div class=hint>Dengerin 10-15 detik pertama aja.</div>`;
+  h+='<div class=hint id=hintBox style="display:none">💡 Hint: '+currentQ.hint+'</div>';
+  document.getElementById('qarea').innerHTML=h;document.getElementById('ans').focus();
 }
 function buyHint(){if(S.hints>0){S.hints--;document.getElementById('hintBox').style.display='block';save();}else if(S.coin>=20){S.coin-=20;document.getElementById('hintBox').style.display='block';save();}else alert('Koin kurang / Hint abis 🗿\nBeli di Shop dulu!');}
-function buySkip(){if(S.skips>0){S.skips--;nextQ();save();}else if(S.coin>=30){S.coin-=30;save();nextQ();}else alert('Koin kurang 🗿');}
+function buySkip(){if(S.skips>0){S.skips--;save();nextQ();}else if(S.coin>=30){S.coin-=30;save();nextQ();}else alert('Koin kurang 🗿');}
 function check(){
-let inp=document.getElementById('ans').value.trim();if(!inp)return;
-let ok=currentQ.caseSensitive?(inp===currentQ.a[0]||norm(inp)===norm(currentQ.a[0])):currentQ.a.some(a=>norm(a)===norm(inp));
-if(!ok&&currentQ.a[0]&&currentQ.a[0].split(' ').length>2){let f=currentQ.a[0].split(' ').slice(0,2).join(' ');if(norm(inp)===norm(f))ok=true;}
-let res=document.getElementById('res');res.style.display='block';daily++;S.played[cur.id]=(S.played[cur.id]||0)+1;
-if(ok){S.xp+=10;S.coin+=10;S.benar++;S.streak++;res.className='res ok';res.innerHTML='✅ BENER! <b>'+currentQ.a[0]+'</b><br>+10 XP +10 Koin • Streak '+S.streak+' 🔥';}
-else{S.streak=0;res.className='res no';res.innerHTML='❌ BELUM BENER. Jawaban: <b>'+currentQ.a[0]+'</b>'+(currentQ.a.length>1?'<br>Jawaban lain: '+currentQ.a.slice(1).join(', '):'');}
-save();document.getElementById('nextBtn').style.display='block';document.getElementById('nextBtn').textContent=daily>=5?'SELESAI →':'SOAL BERIKUTNYA →';
+  let inp=document.getElementById('ans').value.trim();if(!inp)return;
+  let ok=currentQ.caseSensitive?(inp===currentQ.a[0]||norm(inp)===norm(currentQ.a[0])):currentQ.a.some(a=>norm(a)===norm(inp));
+  if(!ok&&currentQ.a[0]&&currentQ.a[0].split(' ').length>2){let f=currentQ.a[0].split(' ').slice(0,2).join(' ');if(norm(inp)===norm(f))ok=true;}
+  let res=document.getElementById('res');res.style.display='block';daily++;S.played[cur.id]=(S.played[cur.id]||0)+1;
+  if(ok){S.xp+=10;S.coin+=10;S.benar++;S.streak++;res.className='res ok';res.innerHTML='✅ BENER! <b>'+currentQ.a[0]+'</b><br>+10 XP +10 Koin • Streak '+S.streak+' 🔥';}
+  else{S.streak=0;res.className='res no';res.innerHTML='❌ BELUM BENER. Jawaban: <b>'+currentQ.a[0]+'</b>'+(currentQ.a.length>1?'<br>Jawaban lain: '+currentQ.a.slice(1).join(', '):'');}
+  save();renderList();document.getElementById('nextBtn').style.display='block';document.getElementById('nextBtn').textContent=daily>=5?'SELESAI →':'SOAL BERIKUTNYA →';
 }
 document.getElementById('ans').addEventListener('keydown',e=>{if(e.key==='Enter')check();});
-render();
+renderFilters();renderList();renderTop();
 </script>
 </body>
   </html>
