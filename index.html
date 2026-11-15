@@ -3,73 +3,272 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anya Quest - Tebak Logo</title>
+<title>Anya Quest</title>
 <style>
-  body{font-family:Arial,sans-serif;background:#0f0f1a;color:#fff;text-align:center;padding:20px;margin:0}
-  .box{max-width:480px;margin:auto;background:#1c1c2e;border-radius:16px;padding:20px;border:2px solid #a855f7}
-  img{width:200px;height:200px;object-fit:contain;background:#fff;border-radius:12px}
-  input{width:90%;padding:12px;border-radius:10px;border:none;margin:12px 0;font-size:16px;text-align:center}
-  button{padding:12px 20px;border:none;border-radius:10px;background:#a855f7;color:#fff;font-size:16px;cursor:pointer;width:100%}
-  .score{color:#22ff88}
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#1a1a1a;color:#fff;padding-bottom:110px}
+a{color:inherit}
+.top{background:#222;border:2px solid #000;border-radius:18px;margin:14px;padding:14px;text-align:center}
+.top h1{margin:0;color:#b6ff00;font-size:38px;letter-spacing:-1px}
+.top p{margin:6px 0 0;color:#ccc}
+.stats{display:flex;gap:10px;margin:0 14px}
+.stat{flex:1;background:#fff;color:#000;border:3px solid #000;border-radius:14px;padding:10px;text-align:center}
+.stat b{font-size:18px}
+.stat span{font-size:12px;color:#555}
+.card{background:#fff;color:#000;border:3px solid #000;border-radius:22px;margin:14px;padding:16px;display:flex;align-items:center;gap:12px}
+.card .icon{width:64px;height:64px;background:#b6ff00;border:3px solid #000;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0}
+.card h2{margin:0;font-size:22px}
+.card p{margin:4px 0 0;color:#555}
+.btn{background:#b6ff00;border:3px solid #000;border-radius:12px;padding:10px 18px;font-weight:900;cursor:pointer;color:#000}
+.btn-black{background:#000;color:#b6ff00;border:3px solid #000}
+.btn-small{padding:8px 12px;font-size:13px}
+input{width:100%;padding:13px;border:3px solid #000;border-radius:12px;font-size:16px;outline:none}
+.page{display:none}
+.page.active{display:block}
+.quiz-box{background:#fff;color:#000;border:3px solid #000;border-radius:22px;margin:14px;padding:16px;text-align:center}
+.quiz-box img{max-width:100%;max-height:240px;border-radius:14px;background:#fff}
+.progress{height:14px;background:#ddd;border:2px solid #000;border-radius:99px;overflow:hidden;margin:10px 0}
+.progress div{height:100%;background:#b6ff00;width:0%}
+.badge{display:inline-block;background:#b6ff00;border:2px solid #000;border-radius:99px;padding:4px 10px;font-size:12px;font-weight:900}
+.result{margin:10px 0;font-weight:900;min-height:22px}
+.nav{position:fixed;left:12px;right:12px;bottom:12px;background:#222;border:2px solid #000;border-radius:16px;display:flex;padding:8px}
+.nav button{flex:1;background:none;border:0;color:#999;cursor:pointer;font-weight:900}
+.nav button.active{color:#b6ff00}
+.nav span{display:block;font-size:22px}
+.robot{position:fixed;right:18px;bottom:92px;width:58px;height:58px;background:#b6ff00;border:3px solid #000;border-radius:50%;font-size:30px;cursor:pointer;z-index:99;display:flex;align-items:center;justify-content:center}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:flex-end;justify-content:center;z-index:100}
+.modal.open{display:flex}
+.modal-box{background:#fff;color:#000;width:100%;max-width:480px;border-radius:22px 22px 0 0;padding:18px;padding-bottom:30px}
+.shop-item{display:flex;justify-content:space-between;align-items:center;border:2px solid #000;border-radius:14px;padding:12px;margin:10px 0}
 </style>
 </head>
 <body>
-<div class="box">
-  <h1>🎮 Anya Quest</h1>
-  <p>Tebak Logo</p>
-  <p class="score">Skor: <span id="score">0</span> | Soal: <span id="num">1</span>/<span id="total">0</span></p>
-  <p id="deskripsi">Memuat soal...</p>
-  <img id="gambar" src="" alt="logo">
-  <br>
-  <input id="jawaban" placeholder="Ketik jawaban kamu...">
-  <button onclick="cek()">JAWAB</button>
-  <p id="hasil"></p>
-  <button onclick="nextSoal()">SOAL BERIKUTNYA ➡️</button>
+
+<div id="page-home" class="page active">
+  <div class="top"><h1>Anya Quest</h1><p>Pilih quest kamu, kumpulin koin, naik level!</p></div>
+  <div class="stats">
+    <div class="stat"><b id="statCoin">0</b><br><span>KOin</span></div>
+    <div class="stat"><b id="statXP">0</b><br><span>XP</span></div>
+    <div class="stat"><b id="statLevel">Lv 1</b><br><span id="statRank">Pemula</span></div>
+  </div>
+
+  <div class="card">
+    <div class="icon">🧩</div>
+    <div style="flex:1"><h2>Tebak Logo</h2><p>153 Soal • Tebak dari gambar</p></div>
+    <button class="btn" onclick="startGame('logo')">PLAY</button>
+  </div>
+
+  <div class="card">
+    <div class="icon">😂</div>
+    <div style="flex:1"><h2>Tebak-Tebakan</h2><p>199 Soal • Tebak plesetan lucu</p></div>
+    <button class="btn" onclick="startGame('tebak')">PLAY</button>
+  </div>
+
+  <div class="card" style="display:block">
+    <h2 style="font-size:18px">Cara Main</h2>
+    <p style="font-size:14px;line-height:1.5">Jawab benar = +10 XP + 10 Koin. Koin bisa dipakai di Shop untuk beli Hint dan Skip. XP naik = Level naik = Rank naik. Semua tersimpan di HP kamu (akun local).</p>
+  </div>
+</div>
+
+<div id="page-game" class="page">
+  <div class="top"><h1 id="gameTitle" style="font-size:26px">Tebak Logo</h1><p><span id="gameProgressText">Soal 1</span> • <span id="gameCoinText">0 Koin</span></p></div>
+  <div class="quiz-box">
+    <div><span class="badge" id="gameBadge">LOGO</span></div>
+    <div id="gameImageWrap" style="margin:14px 0"><img id="gameImage" src="" alt="logo"></div>
+    <h3 id="gameSoal" style="font-size:20px;line-height:1.4;margin:8px 0">Memuat soal...</h3>
+    <div class="progress"><div id="gameBar"></div></div>
+    <input id="gameInput" placeholder="Ketik jawaban kamu...">
+    <div class="result" id="gameResult"></div>
+    <div style="display:flex;gap:10px">
+      <button class="btn" style="flex:1" onclick="checkAnswer()">JAWAB</button>
+      <button class="btn btn-black" onclick="nextSoal()">NEXT →</button>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:10px">
+      <button class="btn btn-small" onclick="useHint()">💡 Hint - 20 Koin</button>
+      <button class="btn btn-small" onclick="useSkip()">⏭️ Skip - 30 Koin</button>
+      <button class="btn btn-small" onclick="backHome()">🏠 Lobby</button>
+    </div>
+    <p style="font-size:13px;color:#666">Timer: <b id="gameTimer">00:00</b> • Skor: <b id="gameScore">0</b></p>
+  </div>
+</div>
+
+<div id="page-rank" class="page">
+  <div class="top"><h1>Rank</h1><p>Pencapaian kamu di Anya Quest</p></div>
+  <div class="quiz-box" style="text-align:left">
+    <h2 id="rankName">Pemula</h2>
+    <p>Level <b id="rankLevel">1</b> • <span id="rankXP">0</span> XP • <span id="rankCoin">0</span> Koin</p>
+    <div class="progress"><div id="rankBar"></div></div>
+    <p style="font-size:14px">Total benar: <b id="rankBenar">0</b><br>Total main: <b id="rankMain">0</b><br>Skor terbaik Tebak Logo: <b id="rankLogo">0</b><br>Skor terbaik Tebak-Tebakan: <b id="rankTebak">0</b></p>
+    <p style="font-size:13px;color:#666">Rank ini local, tersimpan di HP kamu. Nanti kalau sudah ada server, rank bisa dibandingkan dengan semua pemain.</p>
+  </div>
+</div>
+
+<div id="page-shop" class="page">
+  <div class="top"><h1>Shop</h1><p>Koin kamu: <b id="shopCoin">0</b></p></div>
+  <div class="quiz-box" style="text-align:left">
+    <div class="shop-item"><div><b>💡 Hint</b><br><span style="font-size:13px">Buka 1 huruf jawaban</span></div><button class="btn btn-small" onclick="buyHintStock()">Beli 20 Koin</button></div>
+    <div class="shop-item"><div><b>⏭️ Skip</b><br><span style="font-size:13px">Lewati soal susah</span></div><button class="btn btn-small" onclick="buySkipStock()">Beli 30 Koin</button></div>
+    <div class="shop-item"><div><b>🔥 Tema Neon</b><br><span style="font-size:13px">Sudah aktif - tema Anya Quest</span></div><button class="btn btn-small">AKTIF</button></div>
+    <p>Stok Hint: <b id="shopHint">0</b> • Stok Skip: <b id="shopSkip">0</b><br><span style="font-size:13px;color:#666">Stok dipakai otomatis saat kamu pencet Hint / Skip di dalam game.</span></p>
+  </div>
+</div>
+
+<div id="page-profile" class="page">
+  <div class="top"><h1>Profile</h1><p>Akun Local - tersimpan di HP</p></div>
+  <div class="quiz-box" style="text-align:left">
+    <p>Nama kamu:</p>
+    <input id="profileName" placeholder="Contoh: Anya, Rizky...">
+    <br><br>
+    <button class="btn" onclick="saveProfile()">SIMPAN NAMA</button>
+    <p style="font-size:13px;color:#666;margin-top:12px">Tidak perlu email / password. Nama ini dipakai untuk Rank dan Profile. Kalau ganti HP, data akan mulai dari awal lagi karena belum ada server.</p>
+    <button class="btn btn-black" onclick="resetData()">Reset Data Local</button>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="active" onclick="showPage('home',this)"><span>🏠</span>Home</button>
+  <button onclick="showPage('rank',this)"><span>🏆</span>Rank</button>
+  <button onclick="showPage('shop',this)"><span>🛒</span>Shop</button>
+  <button onclick="showPage('profile',this)"><span>👤</span>Profile</button>
+</div>
+
+<button class="robot" onclick="openRobot()">🤖</button>
+
+<div class="modal" id="robotModal" onclick="if(event.target===this) closeRobot()">
+  <div class="modal-box">
+    <h2>🤖 Hai, aku Anya!</h2>
+    <p style="line-height:1.5">Aku bisa bantu kamu main. Mau apa?</p>
+    <button class="btn" style="width:100%;margin:6px 0" onclick="robotHint()">💡 Minta Hint Gratis (1x sehari)</button>
+    <button class="btn btn-black" style="width:100%;margin:6px 0" onclick="alert('Cara main: Jawab benar dapat 10 Koin + 10 XP. Beli Hint di Shop kalau mentok. Kumpulkan XP untuk naik Rank!')">📖 Cara Main</button>
+    <button class="btn btn-black" style="width:100%;margin:6px 0" onclick="alert('Kalau ada soal error / gambar tidak muncul, screenshot dan kirim ke admin Anya Quest ya!')">🐛 Lapor Bug / CS</button>
+    <button class="btn btn-black" style="width:100%;margin:6px 0" onclick="closeRobot()">Tutup</button>
+  </div>
 </div>
 
 <script>
-let soal = [];
-let index = 0;
-let skor = 0;
-
-// Ambil soal dari file tebaklogo.json yang ada di GitHub yang sama
-fetch('tebaklogo.json')
-  .then(res => res.json())
-  .then(data => {
-    soal = data;
-    document.getElementById('total').innerText = soal.length;
-    tampilSoal();
-  })
-  .catch(() => {
-    document.getElementById('deskripsi').innerText = 'Gagal load tebaklogo.json, cek file nya di GitHub ya';
-  });
-
-function tampilSoal(){
-  let s = soal[index];
-  document.getElementById('deskripsi').innerText = s.deskripsi;
-  document.getElementById('gambar').src = s.img;
-  document.getElementById('num').innerText = index + 1;
-  document.getElementById('jawaban').value = '';
-  document.getElementById('hasil').innerText = '';
+let state = JSON.parse(localStorage.getItem('anyaquest') || '{}');
+if(!state.coin) state = {name:'', coin:0, xp:0, benar:0, main:0, bestLogo:0, bestTebak:0, hint:1, skip:1, lastFreeHint:''};
+function save(){ localStorage.setItem('anyaquest', JSON.stringify(state)); updateUI(); }
+function getRank(xp){
+  if(xp>=500) return ['Master Quest',6];
+  if(xp>=300) return ['Pro Player',5];
+  if(xp>=200) return ['Penjelajah',4];
+  if(xp>=100) return ['Pemburu Soal',3];
+  if(xp>=30) return ['Pemain Baru',2];
+  return ['Pemula',1];
 }
+function updateUI(){
+  let r = getRank(state.xp);
+  document.getElementById('statCoin').textContent = state.coin;
+  document.getElementById('statXP').textContent = state.xp;
+  document.getElementById('statLevel').textContent = 'Lv ' + r[1];
+  document.getElementById('statRank').textContent = r[0];
+  document.getElementById('rankName').textContent = r[0];
+  document.getElementById('rankLevel').textContent = r[1];
+  document.getElementById('rankXP').textContent = state.xp;
+  document.getElementById('rankCoin').textContent = state.coin;
+  document.getElementById('rankBenar').textContent = state.benar;
+  document.getElementById('rankMain').textContent = state.main;
+  document.getElementById('rankLogo').textContent = state.bestLogo;
+  document.getElementById('rankTebak').textContent = state.bestTebak;
+  document.getElementById('rankBar').style.width = Math.min(100, state.xp % 100) + '%';
+  document.getElementById('shopCoin').textContent = state.coin;
+  document.getElementById('shopHint').textContent = state.hint;
+  document.getElementById('shopSkip').textContent = state.skip;
+  document.getElementById('gameCoinText').textContent = state.coin + ' Koin';
+  document.getElementById('profileName').value = state.name || '';
+}
+function showPage(p, el){
+  document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(e=>e.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  if(el) el.classList.add('active');
+  updateUI();
+}
+function backHome(){ showPage('home', document.querySelectorAll('.nav button')[0]); }
+function saveProfile(){ state.name = document.getElementById('profileName').value.trim(); save(); alert('Nama disimpan: ' + (state.name || 'Pemain Anya')); }
+function resetData(){ if(confirm('Yakin reset semua data local?')){ localStorage.removeItem('anyaquest'); location.reload(); } }
+function buyHintStock(){ if(state.coin>=20){ state.coin-=20; state.hint++; save(); alert('Hint ditambah! Stok: '+state.hint); } else alert('Koin kurang! Main dulu untuk dapat koin.'); }
+function buySkipStock(){ if(state.coin>=30){ state.coin-=30; state.skip++; save(); alert('Skip ditambah! Stok: '+state.skip); } else alert('Koin kurang!'); }
+function openRobot(){ document.getElementById('robotModal').classList.add('open'); }
+function closeRobot(){ document.getElementById('robotModal').classList.remove('open'); }
 
-function cek(){
-  let jawab = document.getElementById('jawaban').value.toLowerCase().trim();
-  let benar = soal[index].jawaban.toLowerCase().trim();
-  if(jawab === benar){
-    skor += 10;
-    document.getElementById('score').innerText = skor;
-    document.getElementById('hasil').innerText = '✅ BENAR! +10 Poin';
+let questions = [], current = 0, score = 0, mode = 'logo', seconds = 0, timer = null, answered = false;
+async function startGame(m){
+  mode = m; current = 0; score = 0; seconds = 0; answered = false;
+  document.getElementById('gameTitle').textContent = m==='logo' ? 'Tebak Logo' : 'Tebak-Tebakan';
+  document.getElementById('gameBadge').textContent = m==='logo' ? 'LOGO' : 'TEBAK-TEBAKAN';
+  document.getElementById('gameImageWrap').style.display = m==='logo' ? 'block' : 'none';
+  showPage('game', null);
+  document.querySelectorAll('.nav button').forEach(e=>e.classList.remove('active'));
+  try{
+    let file = m==='logo' ? 'tebaklogo.json' : 'tebaktebakan.json';
+    let res = await fetch(file);
+    questions = await res.json();
+    questions = questions.sort(()=>Math.random()-0.5);
+  }catch(e){
+    document.getElementById('gameSoal').textContent = 'File '+ (m==='logo'?'tebaklogo.json':'tebaktebakan.json') + ' tidak ketemu. Pastikan file ada di repo yang sama.';
+    return;
+  }
+  clearInterval(timer);
+  timer = setInterval(()=>{ seconds++; let mm=String(Math.floor(seconds/60)).padStart(2,'0'); let ss=String(seconds%60).padStart(2,'0'); document.getElementById('gameTimer').textContent = mm+':'+ss; },1000);
+  state.main++; save();
+  showSoal();
+}
+function showSoal(){
+  if(current>=questions.length) current=0;
+  let q = questions[current];
+  answered = false;
+  document.getElementById('gameInput').value='';
+  document.getElementById('gameResult').textContent='';
+  document.getElementById('gameProgressText').textContent = 'Soal ' + (current+1) + ' / ' + questions.length;
+  document.getElementById('gameBar').style.width = ((current+1)/questions.length*100) + '%';
+  document.getElementById('gameScore').textContent = score;
+  if(mode==='logo'){
+    document.getElementById('gameImage').src = q.image || q.gambar || '';
+    document.getElementById('gameSoal').textContent = q.deskripsi || q.soal || q.hint || 'Tebak logo ini!';
   } else {
-    document.getElementById('hasil').innerText = '❌ SALAH! Jawabannya: ' + soal[index].jawaban;
+    document.getElementById('gameSoal').textContent = q.soal || '';
   }
 }
-
-function nextSoal(){
-  index++;
-  if(index >= soal.length) index = 0;
-  tampilSoal();
+function norm(s){ return (s||'').toLowerCase().trim().replace(/[^a-z0-9 ]/g,''); }
+function checkAnswer(){
+  if(answered) return;
+  let q = questions[current];
+  let jawab = document.getElementById('gameInput').value;
+  let benar = q.jawaban || q.answer || '';
+  if(!jawab.trim()){ document.getElementById('gameResult').textContent='Isi dulu jawaban kamu!'; return; }
+  answered = true;
+  if(norm(jawab)===norm(benar)){
+    score+=10; state.coin+=10; state.xp+=10; state.benar++;
+    if(mode==='logo') state.bestLogo=Math.max(state.bestLogo, score); else state.bestTebak=Math.max(state.bestTebak, score);
+    document.getElementById('gameResult').textContent='✅ BENAR! +10 Koin +10 XP • Jawaban: '+benar;
+    document.getElementById('gameResult').style.color='green';
+  } else {
+    document.getElementById('gameResult').textContent='❌ SALAH! Jawaban: '+benar;
+    document.getElementById('gameResult').style.color='red';
+  }
+  document.getElementById('gameScore').textContent=score;
+  save();
 }
+function nextSoal(){ current++; showSoal(); }
+function useHint(){
+  if(state.hint<=0){ alert('Stok Hint habis! Beli di Shop dulu.'); return; }
+  let q = questions[current]; let benar = q.jawaban || q.answer || '';
+  state.hint--; save();
+  document.getElementById('gameResult').textContent='💡 Hint: Huruf pertama = ' + benar.charAt(0) + ' • Panjang = ' + benar.length + ' huruf • Sisa Hint: ' + state.hint;
+}
+function useSkip(){
+  if(state.skip<=0){ alert('Stok Skip habis! Beli di Shop dulu.'); return; }
+  state.skip--; save(); nextSoal();
+}
+function robotHint(){
+  let today = new Date().toDateString();
+  if(state.lastFreeHint===today){ alert('Hint gratis hari ini sudah dipakai! Beli di Shop ya.'); return; }
+  state.lastFreeHint=today; state.hint++; save(); closeRobot(); alert('Anya kasih 1 Hint gratis! Stok Hint sekarang: '+state.hint);
+}
+document.getElementById('gameInput').addEventListener('keydown', e=>{ if(e.key==='Enter') checkAnswer(); });
+updateUI();
 </script>
 </body>
   </html>
