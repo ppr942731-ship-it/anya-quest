@@ -27,43 +27,28 @@
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;background:#111;color:#fff;font-family:system-ui,-apple-system,Arial,sans-serif;padding-bottom:110px}
-/* ===== SELAX THEME ===== */
-:root{--lime:#BFFF00;--lime2:#A6FF00;--black:#111;--card:#1A1A1A}
-.top{padding:14px 14px 0;text-align:center}
-/* HERO - kayak SELAXPEDIA, lime + petir + graffiti */
-.hero{background:var(--lime);border:3px solid #000;border-radius:22px;padding:16px 12px 14px;margin:0 2px;position:relative;overflow:hidden;box-shadow:0 6px 0 #000}
-.hero:before{content:"⚡⚡⚡⚡⚡";position:absolute;inset:0;font-size:110px;opacity:.12;line-height:1;letter-spacing:10px;transform:rotate(-8deg)}
-.heroLogo{width:64px;height:64px;border-radius:18px;border:3px solid #000;background:#111;object-fit:cover;position:relative;z-index:1}
-.heroTitle{font-size:42px;font-weight:900;line-height:.9;letter-spacing:-1px;color:#fff;-webkit-text-stroke:2.5px #000;text-shadow:4px 4px 0 #000;transform:rotate(-1.5deg);position:relative;z-index:1;margin-top:8px}
-.heroTitle em{font-style:normal;color:var(--lime);-webkit-text-stroke:2.5px #000}
-.heroSub{display:inline-block;background:#111;color:var(--lime);padding:7px 14px;border-radius:99px;font-weight:800;font-size:13px;margin-top:10px;position:relative;z-index:1;border:2px solid #000}
-.heroDesc{color:#111;font-weight:700;font-size:12px;margin-top:8px;position:relative;z-index:1}
-/* BANNER DALEM HERO STYLE */
-.bannerWrap{padding:12px 14px 0}
-.banner{width:100%;height:172px;object-fit:cover;object-position:left center;border-radius:20px;border:3px solid #000;display:block;background:#1a1a2e;box-shadow:0 5px 0 #000}
-@media(min-width:600px){.banner{height:230px}}
-/* SECTION PILL - kayak Status Server / Tutorial Lengkap */
+:root{--lime:#BFFF00;--black:#111}
+.top{padding:14px 14px 0}
+/* BANNER JADI HERO UTAMA - GANTIN KOTAK HIJAU */
+.bannerHero{width:100%;height:200px;object-fit:cover;object-position:center;border-radius:22px;border:3px solid #000;display:block;background:#1a1a2e;box-shadow:0 6px 0 #000}
+@media(min-width:600px){.bannerHero{height:260px}}
 .pill{background:#1A1A1A;border:2px solid #222;border-radius:18px;padding:13px 16px;margin:14px 14px 0;font-size:20px;font-weight:900}
 .pill b{color:var(--lime)}
 .pill .dot{display:inline-block;width:12px;height:12px;background:var(--lime);border-radius:50%;box-shadow:0 0 0 4px rgba(191,255,0,.2)}
-/* STATS - gantian putih-lime-putih-item kayak RAM/CPU/DISK/UPTIME */
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px 14px 0}
 .stat{border-radius:18px;padding:14px;border:3px solid #000;box-shadow:0 4px 0 #000}
 .stat.white{background:#fff;color:#111}.stat.lime{background:var(--lime);color:#111}.stat.black{background:#1A1A1A;color:#fff;border-color:#333;box-shadow:0 4px 0 #000}
 .stat label{font-size:11px;font-weight:900;letter-spacing:1px;opacity:.8}.stat b{display:block;font-size:26px;line-height:1.1;margin-top:4px}
 .stat small{font-size:11px;opacity:.8}.stat .bar{height:7px;background:rgba(0,0,0,.15);border-radius:99px;overflow:hidden;margin-top:8px}.stat .bar i{display:block;height:100%;background:#111}
 .stat.black .bar{background:#333}.stat.black .bar i{background:var(--lime)}
-/* SEARCH + FILTER */
 .searchBar{padding:12px 14px 0}
 .searchBar input{width:100%;padding:14px;border-radius:16px;border:3px solid #000;background:#fff;color:#111;font-size:14px;font-weight:600;outline:none;box-shadow:0 4px 0 #000}
 .filters{display:flex;gap:8px;overflow-x:auto;padding:12px 14px;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}
 .filters button{white-space:nowrap;padding:10px 16px;border-radius:99px;border:2px solid #000;background:#fff;color:#111;font-weight:900;font-size:12px;cursor:pointer;box-shadow:0 3px 0 #000}
 .filters button.on{background:var(--lime)}
-/* BUTTON GEDE - kayak Masuk Ke Dashboard */
 .btnLime{width:calc(100% - 28px);margin:12px 14px 0;padding:15px;border:3px solid #000;border-radius:16px;background:var(--lime);color:#111;font-weight:900;font-size:16px;cursor:pointer;box-shadow:0 5px 0 #000;display:flex;align-items:center;justify-content:center;gap:8px}
 .btnWhite{width:calc(100% - 28px);margin:10px 14px 0;padding:14px;border:3px solid #000;border-radius:16px;background:#fff;color:#111;font-weight:900;font-size:15px;cursor:pointer;box-shadow:0 5px 0 #000}
 .btnLime:active,.btnWhite:active{transform:translateY(3px);box-shadow:0 2px 0 #000}
-/* GAME CARD - gantian biar kayak screenshot */
 .card{border-radius:20px;padding:14px;margin:0 14px 10px;display:flex;align-items:center;gap:12px;cursor:pointer;border:3px solid #000;box-shadow:0 4px 0 #000}
 .card.white{background:#fff;color:#111}.card.lime{background:var(--lime);color:#111}.card.black{background:#1A1A1A;color:#fff;border-color:#333}
 .card:active{transform:scale(.98)}
@@ -79,12 +64,10 @@ body{margin:0;background:#111;color:#fff;font-family:system-ui,-apple-system,Ari
 .play{background:#111;color:var(--lime);border:2px solid #000;border-radius:12px;padding:10px 13px;font-weight:900;font-size:12px;cursor:pointer;white-space:nowrap}
 .card.lime .play{background:#fff;color:#111}
 .play:disabled{background:#ddd;color:#888}
-/* WHITE BOX - kayak Tutorial */
 .whiteBox{background:#fff;color:#111;border-radius:22px;padding:16px;margin:12px 14px 0;border:3px solid #000;box-shadow:0 5px 0 #000}
 .whiteBox b{font-size:16px}.whiteBox p,.whiteBox li{color:#333;font-size:13px;line-height:1.6}
 .whiteBox ol{margin:8px 0 0;padding-left:18px}
 .whiteBox .hl{background:var(--lime);padding:1px 6px;border-radius:6px;font-weight:800;color:#111;border:1px solid #000}
-/* GAME PAGE */
 #gamePage,#shopPage,#rankPage,#profilePage{display:none;padding:0 14px}
 .backBtn{width:100%;padding:13px;border:3px solid #000;border-radius:16px;background:#fff;color:#111;font-weight:900;font-size:14px;margin:12px 0;cursor:pointer;box-shadow:0 4px 0 #000}
 .box{background:#fff;color:#111;border-radius:22px;padding:18px;border:3px solid #000;box-shadow:0 5px 0 #000}
@@ -105,23 +88,13 @@ audio{width:100%;margin-top:10px}.meta{font-size:12px;color:#888;text-align:cent
 <body>
 
 <div id="homePage">
-  <!-- HERO SELAX STYLE -->
+  <!-- BANNER JADI HERO -->
   <div class="top">
-    <div class="hero">
-      <img class="heroLogo" src="https://files.catbox.moe/yv8lrg.png" alt="Logo">
-      <div class="heroTitle">ANYA <em>QUEST</em></div>
-      <div class="heroSub">⚡ Your Adventure, Your Challenge!</div>
-      <div class="heroDesc">Pilih quest kamu, kumpulin koin, naik level!</div>
-    </div>
-  </div>
-
-  <div class="bannerWrap">
-    <img class="banner" src="https://files.catbox.moe/tt0pw1.png" alt="Anya Quest Banner">
+    <img class="bannerHero" src="https://files.catbox.moe/tt0pw1.png" alt="Anya Quest">
   </div>
 
   <div class="pill">Status <b>Kamu</b> <span class="dot"></span></div>
 
-  <!-- STATS GANTIAN KAYAK RAM / CPU / DISK / UPTIME -->
   <div class="stats">
     <div class="stat white"><label>🪙 KOIN</label><b id="coin">0</b><small>Buat beli Hint</small><div class="bar"><i id="coinBar" style="width:20%"></i></div></div>
     <div class="stat lime"><label>⭐ XP</label><b id="xp">0</b><small id="xpNext">0 / 100 XP</small><div class="bar"><i id="xpBar" style="width:20%"></i></div></div>
@@ -129,7 +102,7 @@ audio{width:100%;margin-top:10px}.meta{font-size:12px;color:#888;text-align:cent
     <div class="stat black"><label style="color:var(--lime)">🔥 STREAK</label><b id="streakTxt" style="color:var(--lime)">0 🔥</b><small>Jawaban benar beruntun</small></div>
   </div>
 
-  <button class="btnLime" onclick="document.getElementById('searchInput').focus();window.scrollTo({top:220,behavior:'smooth'})">⚡ MAIN SEKARANG</button>
+  <button class="btnLime" onclick="document.getElementById('searchInput').focus();window.scrollTo({top:280,behavior:'smooth'})">⚡ MAIN SEKARANG</button>
   <button class="btnWhite" onclick="showTab('shop')">🛒 LIHAT SHOP</button>
 
   <div class="searchBar"><input id="searchInput" placeholder="🔍 Cari game... contoh: bendera, lagu, ML" oninput="renderList()"></div>
@@ -304,7 +277,11 @@ async function start(id){
   if((S.played[id]||0)>=max){alert('Limit hari ini abis buat '+g.name+' 🗿\nCoba game lain / beli Extra di Shop!');return;}
   showTab('home');document.getElementById('homePage').style.display='none';document.getElementById('gamePage').style.display='block';
   document.getElementById('gtitle').textContent=g.emo+' '+g.name;document.getElementById('ginfo').textContent='Jawab benar +10 XP +10 Koin. Hint 20 Koin, Skip 30 Koin.';
-  try{let r=await fetch(g.file);list=normalize(id,await r.json());}catch(e){document.getElementById('qarea').innerHTML='<div class=q>Gagal load '+g.file+' 😭</div><div class=hint>Cek nama file di GitHub, huruf besar kecil ngaruh.</div>';return;}
+  try{let r=await fetch(g.file);list=normalize(id,await r.json());}catch(e){
+    // TEKS GENERIK - GAK NYEBUT NAMA FILE, BIAR ORANG AWAM GAK SADAR
+    document.getElementById('qarea').innerHTML='<div class=q>Gagal proses load 😭</div><div class=hint>Cek internet kamu, terus coba lagi ya.</div>';
+    return;
+  }
   cur=g;idx=0;daily=0;nextQ();window.scrollTo({top:0});
 }
 function nextQ(){
